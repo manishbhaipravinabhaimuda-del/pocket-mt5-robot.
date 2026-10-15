@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220"><title>Pocket MT5 Robot</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">P</div><div><b>Pocket MT5</b><small>TRADING ROBOT</small></div></div>
+    <nav><a class="active" href="#dashboard">▦ <span>Dashboard</span></a><a href="#strategy">⌁ <span>Strategy</span></a><a href="#risk">◈ <span>Risk controls</span></a><a href="#history">◷ <span>Trade history</span></a><a href="#connection">⌘ <span>Connection</span></a></nav>
+    <div class="sidebar-note"><span class="pulse"></span> Demo-safe mode<br><small>Live execution locked</small></div>
+  </aside>
+  <main id="dashboard">
+    <header><div><div class="eyebrow">TRADING WORKSPACE</div><h1>Robot dashboard</h1><p class="muted">Monitor your strategy and risk controls.</p></div><div class="header-right"><span class="mode-pill"><i></i> DEMO MODE</span><button class="icon-button" id="emergencyTop" aria-label="Emergency stop">Ⅱ</button></div></header>
+    <section class="notice"><div class="notice-icon">!</div><div><b>Live trading is locked</b><p>Broker is not connected. This website is a dashboard prototype; it does not place real orders.</p></div><span class="lock">🔒</span></section>
+    <section class="metrics">
+      <article class="metric"><div class="metric-label">Account equity <span>ⓘ</span></div><div class="metric-value" id="equity">$10,000.00</div><div class="metric-foot">Sample demo balance</div></article>
+      <article class="metric"><div class="metric-label">Today's P&amp;L</div><div class="metric-value" id="pnl">$0.00</div><div class="metric-foot">No broker data connected</div></article>
+      <article class="metric"><div class="metric-label">Open positions</div><div class="metric-value" id="positions">0</div><div class="metric-foot">Demo preview only</div></article>
+      <article class="metric"><div class="metric-label">Daily loss limit</div><div class="metric-value">2.0%</div><div class="metric-foot">Illustrative default</div></article>
+    </section>
+    <section class="main-grid">
+      <article class="panel chart-panel">
+        <div class="panel-heading"><div><h2>Market watch</h2><p class="muted">Illustrative prices · Not live market data</p></div><span class="timeframe">M5 ▾</span></div>
+        <div class="chart-top"><div><span class="symbol" id="symbolName">XAUUSD</span><span class="symbol-desc">Gold / US Dollar</span></div><div class="price">$2,354.80 <span class="up">+0.42%</span></div></div>
+        <div class="chart-wrap"><svg viewBox="0 0 680 230" preserveAspectRatio="none" role="img" aria-label="Illustrative candlestick chart">
+          <g class="gridlines"><path d="M0 30H680 M0 75H680 M0 120H680 M0 165H680 M0 210H680"/><path d="M85 0V230 M170 0V230 M255 0V230 M340 0V230 M425 0V230 M510 0V230 M595 0V230"/></g>
+          <polyline class="chart-line" points="0,174 35,162 65,179 92,146 120,153 147,125 175,143 205,110 232,119 260,92 288,115 316,101 344,124 371,86 399,99 427,67 455,82 483,60 511,76 539,43 567,58 595,34 623,52 650,24 680,36"/>
+          <g id="candles"></g>
+        </svg><div class="chart-label label-top">$2,370.00</div><div class="chart-label label-mid">$2,355.00</div><div class="chart-label label-bottom">$2,340.00</div><div class="chart-watermark">PREVIEW</div></div>
+        <div class="chart-legend"><span><i class="dot green"></i> Bullish</span><span><i class="dot red"></i> Bearish</span><span>Strategy: EMA + Sweep + BOS</span></div>
+      </article>
+      <article class="panel robot-panel">
+        <div class="panel-heading"><div><h2>Robot controls</h2><p class="muted">Execution disabled until configured</p></div><span class="status-dot"></span></div>
+        <div class="robot-state"><div class="robot-icon">⌁</div><div><b id="robotStatus">Robot paused</b><small id="robotSub">No orders will be sent</small></div><span class="tag gray" id="robotTag">PAUSED</span></div>
+        <button class="primary-button" id="startDemo">Start demo simulation</button>
+        <button class="stop-button" id="emergency">Ⅱ &nbsp; Emergency stop</button>
+        <div class="divider"></div>
+        <div class="setting-row"><span>Live trading</span><span class="tag red">LOCKED</span></div>
+        <div class="setting-row"><span>Broker connection</span><span class="tag gray">NOT CONNECTED</span></div>
+        <div class="setting-row"><span>New orders</span><span class="tag gray" id="ordersState">BLOCKED</span></div>
+      </article>
+    </section>
+    <section class="main-grid lower-grid">
+      <article class="panel" id="strategy"><div class="panel-heading"><div><h2>Strategy configuration</h2><p class="muted">Settings preview — not connected to execution</p></div></div>
+        <div class="field-grid"><label>Market<select id="market"><option>XAUUSD · Gold</option><option>EURUSD · Forex</option><option>BTCUSD · Crypto CFD</option></select></label><label>Timeframe<select><option>M5 · 5 minutes</option></select></label><label>Strategy<select><option>EMA + Liquidity Sweep + BOS</option></select></label><label>Risk per trade<input value="0.5%" readonly></label></div>
+        <div class="strategy-chips"><span>EMA trend filter</span><span>Liquidity sweep</span><span>Break of structure</span><span>Risk-based sizing</span></div>
+      </article>
+      <article class="panel" id="risk"><div class="panel-heading"><div><h2>Risk protection</h2><p class="muted">Conservative starter defaults</p></div></div>
+        <div class="risk-row"><div><b>Risk per trade</b><small>Based on equity</small></div><strong>0.5%</strong></div>
+        <div class="risk-row"><div><b>Take profit</b><small>Risk-to-reward target</small></div><strong>1 : 2</strong></div>
+        <div class="risk-row"><div><b>Daily loss limit</b><small>Trading halts when reached</small></div><strong>2.0%</strong></div>
+        <div class="risk-row"><div><b>Max positions</b><small>Per symbol</small></div><strong>1</strong></div>
+        <div class="risk-warning">⚠ Slippage, gaps, contract sizes and broker rules can cause actual losses to exceed planned risk.</div>
+      </article>
+    </section>
+    <section class="panel history-panel" id="history"><div class="panel-heading"><div><h2>Activity &amp; trade history</h2><p class="muted">Local demo events only</p></div><button class="text-button" id="clearHistory">Clear</button></div><div class="table-wrap"><table><thead><tr><th>TIME</th><th>EVENT</th><th>MARKET</th><th>STATUS</th></tr></thead><tbody id="historyBody"><tr><td>—</td><td>Waiting for action</td><td>—</td><td><span class="tag gray">IDLE</span></td></tr></tbody></table></div></section>
+    <section class="panel connection-panel" id="connection"><div class="panel-heading"><div><h2>Broker connection</h2><p class="muted">MT5 requires a separate compatible execution service.</p></div><span class="tag red">OFFLINE</span></div><div class="connection-steps"><div><span>1</span><div><b>Choose a broker</b><small>Confirm MT5, demo account and supported symbols.</small></div></div><div><span>2</span><div><b>Configure Windows VPS</b><small>Run MT5 terminal and a secured execution bridge on the server.</small></div></div><div><span>3</span><div><b>Verify demo orders</b><small>Test position sizing, SL/TP, duplicate prevention and emergency stop.</small></div></div></div><p class="muted small">Never enter your broker password or API secrets into this static demo website.</p></section>
+    <footer>Pocket MT5 Robot · Demo dashboard prototype · Not financial advice</footer>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body></html>
